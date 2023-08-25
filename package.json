@@ -1,0 +1,18 @@
+{
+  "name": "wedding-backend",
+  "version": "1.0.0",
+  "description": "Serverless FastApi ",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "serverless": "^3.34.0"
+  },
+  "devDependencies": {
+    "serverless-ignore": "^0.2.1",
+    "serverless-python-requirements": "^6.0.0"
+  }
+}

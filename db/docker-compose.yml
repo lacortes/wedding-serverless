@@ -1,0 +1,18 @@
+version: '3'
+services:
+  postgres:
+    image:
+      postgres:alpine3.18
+    container_name: postgres-wedding-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: wedding
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+volumes:
+  postgres_data:

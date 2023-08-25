@@ -1,0 +1,26 @@
+service: serverless-fastapi
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  region: us-west-1
+  runtime: python3.11
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+    layer: true
+    noDeploy:
+      - uvicorn
+
+functions:
+  api:
+    handler: app.handler
+    layers:
+      - Ref: PythonRequirementsLambdaLayer
+    events:
+      - httpApi: '*'
+
+plugins:
+  - serverless-python-requirements
+  - serverless-ignore
