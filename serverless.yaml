@@ -1,4 +1,4 @@
-service: serverless-fastapi
+service: serverless-wedding
 frameworkVersion: '3'
 
 provider:
