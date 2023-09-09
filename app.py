@@ -85,7 +85,7 @@ class RsvpGuest(BaseModel):
 
 class RsvpCreate(BaseModel):
     guest: RsvpGuest
-    party: List[RsvpGuest]
+    party: List[RsvpGuest] = []
 
 
 @app.get("/v1/guests", response_model=Guest)
@@ -114,15 +114,15 @@ async def update_guest(guest: GuestUpdate):
 
 @app.post("/v1/guests/rsvp")
 async def create_rsvp(rsvp: RsvpCreate):
-    guest_db = get_guest_db(rsvp.guest.first_name, rsvp.guest.last_name)
+    guest_db = get_guest_db(rsvp.guest.first_name.lower(), rsvp.guest.last_name.lower())
     if guest_db is None:
         raise HTTPException(status_code=404, detail="Primary Guest not found")
 
     if guest_db.rsvp != RSVP.pending or rsvp.guest.rsvp == guest_db.rsvp:
         raise HTTPException(status_code=409, detail="Cannot create rsvp for an already created rsvp")
 
-    if rsvp.guest.rsvp == RSVP.attending and guest_db.avail_guests <= 0 < len(
-            rsvp.party) or guest_db.avail_guests < len(rsvp.party):
+    if (rsvp.guest.rsvp == RSVP.attending and guest_db.avail_guests <= 0 < len(rsvp.party)
+            or guest_db.avail_guests < len(rsvp.party)):
         raise HTTPException(
             status_code=400,
             detail=f"{guest_db.first_name} {guest_db.last_name} has disallowed guests."
