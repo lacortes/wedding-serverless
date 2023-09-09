@@ -5,6 +5,9 @@ provider:
   name: aws
   region: us-west-1
   runtime: python3.11
+  logs:
+    httpApi:
+      format: '{ "requestId":"$context.requestId", "ip": "$context.identity.sourceIp", "requestTime":"$context.requestTime", "httpMethod":"$context.httpMethod","routeKey":"$context.routeKey", "status":"$context.status","protocol":"$context.protocol", "path":"$context.path" }'
 
 custom:
   pythonRequirements:

@@ -116,6 +116,7 @@ async def update_guest(guest: GuestUpdate):
 async def create_rsvp(rsvp: RsvpCreate):
     guest_db = get_guest_db(rsvp.guest.first_name.lower(), rsvp.guest.last_name.lower())
     if guest_db is None:
+        print()
         raise HTTPException(status_code=404, detail="Primary Guest not found")
 
     if guest_db.rsvp != RSVP.pending or rsvp.guest.rsvp == guest_db.rsvp:
