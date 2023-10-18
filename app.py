@@ -90,8 +90,8 @@ class RsvpCreate(BaseModel):
 
 @app.get("/v1/guests", response_model=Guest)
 async def get_guest(
-        first_name: Annotated[str, Query(min_length=3, max_length=20, regex="[a-zA-Z]")],
-        last_name: Annotated[str, Query(min_length=3, max_length=20, regex="[a-zA-Z]")],
+        first_name: Annotated[str, Query(min_length=2, max_length=20, regex="[a-zA-Z]")],
+        last_name: Annotated[str, Query(min_length=2, max_length=20, regex="[a-zA-Z]")],
 ):
     guest = get_guest_db(first_name.lower(), last_name.lower())
     if not guest:
