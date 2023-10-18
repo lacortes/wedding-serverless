@@ -62,14 +62,14 @@ class SecondaryGuest(SQLModel, table=True):
 
 
 class GuestUpdate(BaseModel):
-    first_name: Annotated[str, Field(min_length=3, max_length=20, regex="[a-zA-Z]")]
-    last_name: Annotated[str, Field(min_length=3, max_length=20, regex="[a-zA-Z]")]
+    first_name: Annotated[str, Field(min_length=2, max_length=20, regex="[a-zA-Z]")]
+    last_name: Annotated[str, Field(min_length=2, max_length=20, regex="[a-zA-Z]")]
     rsvp: RSVP
 
 
 class RsvpGuest(BaseModel):
-    first_name: Annotated[str, Field(min_length=3, max_length=20, regex="[a-zA-Z]")]
-    last_name: Annotated[str, Field(min_length=3, max_length=20, regex="[a-zA-Z]")]
+    first_name: Annotated[str, Field(min_length=2, max_length=20, regex="[a-zA-Z]")]
+    last_name: Annotated[str, Field(min_length=2, max_length=20, regex="[a-zA-Z]")]
     rsvp: RSVP
     selection: conint(ge=0, le=2)
 
